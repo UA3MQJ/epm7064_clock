@@ -9,7 +9,7 @@ input wire btn_HH, btn_MM, btn_SS, btn_SAFE;
 wire SAFE_MODE = ~btn_SAFE;
 
 //clk - general clock 32768
-reg [13:0] clk_div; initial clk_div <= 14'd0; //?? may be not implement
+reg [13:0] clk_div; initial clk_div <= 14'd0;
 always @(posedge clk) clk_div <= clk_div + 1'b1;
 
 reg [6:0] sec;// 0..119 - 7bit
@@ -49,13 +49,12 @@ wire [3:0] top_bits = clk_div[6:3]; //
 //hide hour zero
 wire h_show = !(hh==0);
 
-wire [4:0] t_dig_sel = (top_bits == 4'b0000 && h_show) ? 4'b0001 :
-					   (top_bits == 4'b0100) ? 4'b0010 :
-					   (top_bits == 4'b1000) ? 4'b0100 :
-					   (top_bits == 4'b1100) ? 4'b1000 : 4'b0000;
-            
-wire hsec = clk_div[13];     
-assign dig_sel = t_dig_sel; //(hsec == 1'b1) ? t_dig_sel : 4'b0000;
+wire [4:0] t_dig_sel = (top_bits == 4'b0000 && h_show &&(!SAFE_MODE)) ? 4'b0001 :
+					   (top_bits == 4'b0100 &&(!SAFE_MODE)) ? 4'b0010 :
+					   (top_bits == 4'b1000 &&(!SAFE_MODE)) ? 4'b0100 :
+					   (top_bits == 4'b1100 &&(!SAFE_MODE)) ? 4'b1000 : 4'b0000;
+                
+assign dig_sel = t_dig_sel;
 
 wire [6:0] s_m1;
 wire [6:0] s_m2;
@@ -67,14 +66,12 @@ bcd2seg0_9 sseg_2( .sin(h),  .sout(s_m2));
 bcd2seg0_5 sseg_3( .sin(mm),  .sout(s_m3));
 bcd2seg0_9 sseg_4( .sin(m),  .sout(s_m4));
 
-//assign segs = {seg_g, seg_f, seg_e, seg_d, seg_c, seg_b, seg_a};
-
 wire [6:0] t_segs = (top_bits == 4'b0000) ? ~s_m1 :
                     (top_bits == 4'b0100) ? ~s_m2 :
                     (top_bits == 4'b1000) ? ~s_m3 :
                     (top_bits == 4'b1100) ? ~s_m4 : 7'b0000000;
               
-assign segs = t_segs; //(hsec == 1'b1) ? t_segs : 7'b0000000;
+assign segs = t_segs;
 
 //one second tick indicator
 assign led_second_tick = (sec[0]&&(!SAFE_MODE))||(sec[0]&&(clk_div[13:6]==10'd0)&&(SAFE_MODE)); //!!
