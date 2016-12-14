@@ -1,0 +1,70 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 1991-2011 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus II 32-bit
+# Version 11.1 Build 173 11/01/2011 SJ Full Version
+# Date created = 19:47:33  November 06, 2016
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		epm7064_clock_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus II software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY MAX7000S
+set_global_assignment -name DEVICE "EPM7064SLC44-10"
+set_global_assignment -name TOP_LEVEL_ENTITY epm7064_clock
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 11.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "19:47:33  NOVEMBER 06, 2016"
+set_global_assignment -name LAST_QUARTUS_VERSION 9.0
+set_global_assignment -name DEVICE_FILTER_PIN_COUNT 44
+set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 10
+set_global_assignment -name EDA_SIMULATION_TOOL "<None>"
+set_global_assignment -name VERILOG_FILE epm7064_clock.v
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS OUTPUT DRIVING GROUND"
+set_global_assignment -name MAX7000_DEVICE_IO_STANDARD TTL
+set_location_assignment PIN_43 -to clk
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS OUTPUT DRIVING AN UNSPECIFIED SIGNAL"
+set_global_assignment -name DEVICE_FILTER_PACKAGE ANY
+set_location_assignment PIN_28 -to dig_sel[0]
+set_location_assignment PIN_27 -to dig_sel[1]
+set_location_assignment PIN_26 -to dig_sel[2]
+set_location_assignment PIN_25 -to dig_sel[3]
+set_location_assignment PIN_21 -to segs[0]
+set_location_assignment PIN_20 -to segs[1]
+set_location_assignment PIN_19 -to segs[2]
+set_location_assignment PIN_18 -to segs[3]
+set_location_assignment PIN_17 -to segs[4]
+set_location_assignment PIN_16 -to segs[5]
+set_location_assignment PIN_14 -to segs[6]
+set_global_assignment -name MISC_FILE "D:/FPGA_Projects/epm7064/epm7064_clock.dpf"
+set_location_assignment PIN_6 -to btn_HH
+set_location_assignment PIN_5 -to btn_MM
+set_location_assignment PIN_4 -to btn_SS
+set_location_assignment PIN_41 -to btn_SAFE
+set_location_assignment PIN_8 -to led_second_tick
